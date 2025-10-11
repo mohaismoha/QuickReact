@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 
 export async function GET(req: NextRequest) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://quickreact.app"
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://quickreact.vercel.app"
 
   const html = `
     <!DOCTYPE html>
