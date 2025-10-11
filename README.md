@@ -21,9 +21,9 @@ A reaction-time game where players earn QRP tokens by signing EIP-712 messages a
 
 ### 1. Install Dependencies
 
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
 ### 2. Deploy Smart Contracts
 
@@ -47,41 +47,41 @@ After deployment, call these functions in Remix:
 1. **On QuickReactPoint contract:**
    ```solidity
    setMinter(address) // Pass ReactionTimeGame contract address
-   \`\`\`
+   ```
 
 2. **On ReactionTimeGame contract:**
    ```solidity
    setDomainSeparator(uint256) // Pass chain ID: 84532 for Base Sepolia, 8453 for Base
-   \`\`\`
+   ```
 
 ### 3. Update Frontend Configuration
 
 Edit `utils/contract.ts`:
 
-\`\`\`typescript
+```typescript
 export const REACTION_CONTRACT_ADDRESS = '0xYOUR_REACTION_GAME_ADDRESS'
-\`\`\`
+```
 
 ### 4. Set Environment Variables
 
 Create `.env.local`:
 
-\`\`\`bash
+```bash
 NEXT_PUBLIC_RPC=https://sepolia.base.org
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
-\`\`\`
+```
 
 For production, use:
-\`\`\`bash
+```bash
 NEXT_PUBLIC_RPC=https://mainnet.base.org
 NEXT_PUBLIC_BASE_URL=https://your-domain.com
-\`\`\`
+```
 
 ### 5. Run Development Server
 
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
 Open [http://localhost:3000](http://localhost:3000)
 
