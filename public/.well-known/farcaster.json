@@ -5,17 +5,13 @@
     "signature": "MHg5MjEyYWRjYzBiZWQ2MzY5N2RlNDdiNTg2ZGRmYWQ1ODkxMGNiZWM3YjhjNmI5ZGVmOTRiYjE4OTRkMGMxZTU1MGQyMTE0Y2I5N2U5YTkxZTJiNzRjODg1Y2NlMzVlOTQ4NTAyMmM4MGRjMjdkYjMwM2MzZGNmOTczMmI3OWJmODFi"
   },
   "frame": {
-    "version": "next",
+    "version": "1",
+    "name": "QuickReact",
+    "iconUrl": "https://quickreact.vercel.app/logo.png",
+    "homeUrl": "https://quickreact.vercel.app/game",
     "imageUrl": "https://quickreact.vercel.app/preview.png",
-    "button": {
-      "title": "Play QuickReact",
-      "action": {
-        "type": "launch_frame",
-        "name": "QuickReact",
-        "url": "https://quickreact.vercel.app/game",
-        "splashImageUrl": "https://quickreact.vercel.app/logo.png",
-        "splashBackgroundColor": "#0a0a0a"
-      }
-    }
+    "buttonTitle": "Play Quick React",
+    "splashImageUrl": "https://quickreact.vercel.app/logo.png",
+    "splashBackgroundColor": "#0a0a0a"
   }
 }
