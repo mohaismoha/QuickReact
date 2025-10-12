@@ -8,10 +8,10 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "QuickReact - Reaction Time Game",
-  description: "Test your reaction time and earn QRP tokens on Farcaster",
+  description: "Test your reaction time and earn points on Farcaster",
   openGraph: {
     title: "QuickReact",
-    description: "Test your reaction time and earn QRP tokens",
+    description: "Test your reaction time and earn Points",
     images: ["/preview.png"],
   },
 }
