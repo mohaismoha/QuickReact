@@ -11,12 +11,16 @@ export const metadata: Metadata = {
   description: "Test your reaction time and earn points on Farcaster",
   openGraph: {
     title: "QuickReact",
-    description: "Test your reaction time and earn Points",
+    description: "Test your reaction time and earn points",
     images: ["/preview.png"],
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en" className={inter.className}>
       <body>
