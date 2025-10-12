@@ -9,7 +9,7 @@ export default function Home() {
         <div className="text-center space-y-8">
           <h1 className="text-5xl md:text-7xl font-bold text-electric-green mb-4">QuickReact</h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8">
-            Test your reaction time. Earn QRP tokens. Compete on the leaderboard.
+            Test your reaction time. Earn points. Compete on the leaderboard.
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 mt-12">
