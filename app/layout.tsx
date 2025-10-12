@@ -1,11 +1,12 @@
 import type React from "react"
+import { sdk } from "@farcaster/miniapp-sdk"
 import "./globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Providers } from "./providers"
 
 const inter = Inter({ subsets: ["latin"] })
-
+await sdk.actions.ready()
 export const metadata: Metadata = {
   title: "QuickReact - Reaction Time Game",
   description: "Test your reaction time and earn QRP tokens on Farcaster",
