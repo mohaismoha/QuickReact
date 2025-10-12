@@ -1,3 +1,5 @@
+// utils/eip712.ts
+
 export interface ClaimTypedData {
   domain: {
     name: string
@@ -8,6 +10,7 @@ export interface ClaimTypedData {
   types: {
     Claim: Array<{ name: string; type: string }>
   }
+  primaryType: "Claim"
   message: {
     reactionTime: number
     timestamp: number
@@ -17,11 +20,15 @@ export interface ClaimTypedData {
   }
 }
 
+/**
+ * Build EIP-712 typed data for QuickReact claims.
+ * Ensures domain + struct values are consistent with the deployed contract.
+ */
 export function buildClaimTypedData(
   reactionTime: number,
   timestamp: number,
   nonce: number,
-  contractAddress: string,
+  verifyingContract: string, // must be ReactionTimeGame contract address
   chainId: number,
 ): ClaimTypedData {
   return {
@@ -29,7 +36,7 @@ export function buildClaimTypedData(
       name: "QuickReact",
       version: "1",
       chainId,
-      verifyingContract: contractAddress,
+      verifyingContract,
     },
     types: {
       Claim: [
@@ -40,12 +47,13 @@ export function buildClaimTypedData(
         { name: "chainId", type: "uint256" },
       ],
     },
+    primaryType: "Claim",
     message: {
       reactionTime,
       timestamp,
       nonce,
-      contractAddress,
-      chainId,
+      contractAddress: verifyingContract, // enforce same as domain.verifyingContract
+      chainId,                            // enforce same as domain.chainId
     },
   }
 }
