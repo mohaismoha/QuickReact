@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
         <meta property="fc:frame:button:2:action" content="link" />
         <meta property="fc:frame:button:2:target" content="${baseUrl}/leaderboard" />
         <meta property="og:title" content="QuickReact - Reaction Time Game" />
-        <meta property="og:description" content="Test your reaction time and earn QRP tokens" />
+        <meta property="og:description" content="Test your reaction time and earn points to climb the Leaderboard" />
         <meta property="og:image" content="${baseUrl}/preview.png" />
       </head>
       <body>
