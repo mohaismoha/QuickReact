@@ -1,118 +1,45 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState } from "react"
+import Header from "@/components/Header"
+import GameBoard from "@/components/GameBoard"
+import ClaimButton from "@/components/ClaimButton"
+import Toast from "@/components/Toast"
 
-type GameState = "idle" | "waiting" | "flash" | "complete" | "too-early"
-
-interface GameBoardProps {
-  onComplete: (reactionTime: number) => void
-}
-
-export default function GameBoard({ onComplete }: GameBoardProps) {
-  const [gameState, setGameState] = useState<GameState>("idle")
+export default function GamePage() {
   const [reactionTime, setReactionTime] = useState<number | null>(null)
-  const startTimeRef = useRef<number>(0)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" | "info" } | null>(null)
 
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-      }
-    }
-  }, [])
-
-  const startGame = () => {
-    setGameState("waiting")
-    setReactionTime(null)
-
-    // Random delay between 1.5s and 4.5s
-    const delay = 1500 + Math.random() * 3000
-
-    timeoutRef.current = setTimeout(() => {
-      setGameState("flash")
-      startTimeRef.current = Date.now()
-    }, delay)
+  const handleGameComplete = (time: number) => {
+    setReactionTime(time)
+    setToast({ message: `Reaction time: ${time}ms!`, type: "success" })
   }
 
-  const handleClick = () => {
-    if (gameState === "waiting") {
-      // Clicked too early
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-      }
-      setGameState("too-early")
-      return
-    }
-
-    if (gameState === "flash") {
-      const endTime = Date.now()
-      const reaction = endTime - startTimeRef.current
-      setReactionTime(reaction)
-      setGameState("complete")
-      onComplete(reaction)
-    }
-  }
-
-  const resetGame = () => {
-    setGameState("idle")
+  const handleClaimSuccess = () => {
+    setToast({ message: "Claim successful! Check your wallet.", type: "success" })
     setReactionTime(null)
   }
 
-  const getBackgroundColor = () => {
-    switch (gameState) {
-      case "flash":
-        return "bg-electric-green"
-      case "waiting":
-        return "bg-red-900"
-      case "too-early":
-        return "bg-red-600"
-      default:
-        return "bg-gray-900"
-    }
-  }
-
-  const getMessage = () => {
-    switch (gameState) {
-      case "idle":
-        return 'Click "Start" to begin'
-      case "waiting":
-        return "Wait for green..."
-      case "flash":
-        return "CLICK NOW!"
-      case "complete":
-        return `Reaction time: ${reactionTime}ms`
-      case "too-early":
-        return "Too early! Try again."
-      default:
-        return ""
-    }
+  const handleClaimError = (error: string) => {
+    setToast({ message: error, type: "error" })
   }
 
   return (
-    <div
-      className={`flex flex-col items-center justify-center h-96 rounded-2xl transition-colors duration-300 ${getBackgroundColor()}`}
-      onClick={handleClick}
-    >
-      <h2 className="text-white text-2xl font-semibold mb-4">{getMessage()}</h2>
+    <div className="min-h-screen bg-deep-black">
+      <Header />
+      <main className="container mx-auto px-4 py-8 max-w-2xl">
+        <h1 className="text-4xl font-bold text-electric-green text-center mb-8">Reaction Time Game</h1>
 
-      {gameState === "idle" && (
-        <button
-          onClick={startGame}
-          className="bg-electric-green text-black font-bold py-2 px-6 rounded-full hover:bg-green-400 transition"
-        >
-          Start
-        </button>
-      )}
+        <GameBoard onComplete={handleGameComplete} />
 
-      {(gameState === "complete" || gameState === "too-early") && (
-        <button
-          onClick={resetGame}
-          className="mt-4 bg-white text-black font-bold py-2 px-6 rounded-full hover:bg-gray-300 transition"
-        >
-          Try Again
-        </button>
-      )}
+        {reactionTime !== null && (
+          <div className="mt-8">
+            <ClaimButton reactionTime={reactionTime} onSuccess={handleClaimSuccess} onError={handleClaimError} />
+          </div>
+        )}
+      </main>
+
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>
   )
 }
