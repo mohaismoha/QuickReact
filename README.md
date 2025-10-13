@@ -3,12 +3,12 @@
 A reaction-time game where players earn QRP tokens by signing EIP-712 messages and claiming rewards onchain.
 ## Features
 
-- 🎮 Reaction time game with randomized delays
-- 🔐 EIP-712 signature-based claiming (no backend)
-- 🏆 Onchain leaderboard from contract events
-- 🎯 Points system: <300ms = 5 QRP, 300-499ms = 3 QRP, ≥500ms = 1 QRP
-- 📱 Mobile-first responsive design
-- 🖼️ Farcaster Frame integration
+-  Reaction time game with randomized delays
+-  EIP-712 signature-based claiming (no backend)
+-  Onchain leaderboard from contract events
+-  Points system: <300ms = 5 QRP, 300-499ms = 3 QRP, ≥500ms = 1 QRP
+-  Mobile-first responsive design
+-  Farcaster Frame integration
 
 ## Tech Stack
 
@@ -171,15 +171,6 @@ Open [http://localhost:3000](http://localhost:3000)
 - Aggregates best (lowest) reaction time per player
 - Displays top 20 players sorted by best time
 
-## Contract Addresses
-
-### Base Sepolia (Testnet)
-- QuickReactPoint: `[DEPLOY AND ADD HERE]`
-- ReactionTimeGame: `[DEPLOY AND ADD HERE]`
-
-### Base Mainnet
-- QuickReactPoint: `[DEPLOY AND ADD HERE]`
-- ReactionTimeGame: `[DEPLOY AND ADD HERE]`
 
 ## License
 
