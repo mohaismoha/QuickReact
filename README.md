@@ -19,9 +19,11 @@ A reaction-time game where players earn QRP tokens by signing EIP-712 messages a
 
 ## Quick Start
 
-### 1. Install Dependencies
+### 1. Clone and Install Dependencies
 
 ```bash
+git clone https://github.com/Wizbisy/QuickReact.git
+cd QuickReact
 npm install
 ```
 
