@@ -5,7 +5,7 @@ import { WagmiProvider } from "wagmi"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { createAppKit } from "@reown/appkit/react"
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi"
-import { base } from "@reown/appkit/networks"
+import { base, baseSepolia } from "@reown/appkit/networks"
 
 const projectId = process.env.NEXT_PUBLIC_REOWN_PROJECT_ID || ""
 
