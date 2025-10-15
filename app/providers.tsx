@@ -1,46 +1,44 @@
 "use client"
 
 import type React from "react"
-import { useEffect } from "react"
-import { WagmiProvider, createConfig, http, useChainId, useSwitchChain } from "wagmi"
-import { base } from "wagmi/chains"
+import { WagmiProvider } from "wagmi"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { injected } from "wagmi/connectors"
+import { createAppKit } from "@reown/appkit/react"
+import { WagmiAdapter } from "@reown/appkit-adapter-wagmi"
+import { base, baseSepolia } from "@reown/appkit/networks"
 
+const projectId = process.env.NEXT_PUBLIC_REOWN_PROJECT_ID || ""
 
-const config = createConfig({
-  chains: [base],
-  connectors: [injected()],
-  transports: {
-    [base.id]: http(process.env.NEXT_PUBLIC_RPC || "https://mainnet.base.org"),
+const metadata = {
+  name: "QuickReact",
+  description: "Test your reaction time and earn points",
+  url: process.env.NEXT_PUBLIC_BASE_URL || "https://quickreact.app",
+  icons: ["https://avatars.githubusercontent.com/u/179229932"],
+}
+
+const networks = [base, baseSepolia]
+
+const wagmiAdapter = new WagmiAdapter({
+  networks,
+  projectId,
+})
+
+createAppKit({
+  adapters: [wagmiAdapter],
+  networks,
+  projectId,
+  metadata,
+  features: {
+    analytics: true,
   },
 })
 
 const queryClient = new QueryClient()
 
-function AutoSwitchToBase() {
-  const chainId = useChainId()
-  const { switchChain } = useSwitchChain()
-
-  useEffect(() => {
-    if (chainId && chainId !== base.id) {
-      switchChain({ chainId: base.id }).catch(() => {
-        console.warn("User rejected or wallet doesn't support chain switching.")
-      })
-    }
-  }, [chainId, switchChain])
-
-  return null
-}
-
-
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <AutoSwitchToBase />
-        {children}
-      </QueryClientProvider>
+    <WagmiProvider config={wagmiAdapter.wagmiConfig}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   )
 }
