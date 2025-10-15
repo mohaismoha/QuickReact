@@ -5,7 +5,7 @@ import { WagmiProvider } from "wagmi"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { createAppKit } from "@reown/appkit/react"
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi"
-import { base, baseSepolia } from "@reown/appkit/networks"
+import { base } from "@reown/appkit/networks"
 
 const projectId = process.env.NEXT_PUBLIC_REOWN_PROJECT_ID || ""
 
@@ -16,7 +16,7 @@ const metadata = {
   icons: ["https://avatars.githubusercontent.com/u/179229932"],
 }
 
-const networks = [base, baseSepolia]
+const networks = [base]
 
 const wagmiAdapter = new WagmiAdapter({
   networks,
